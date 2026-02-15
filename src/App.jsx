@@ -15,9 +15,6 @@ function App() {
       <section id="carousel">
         <Carsoul /> 
       </section>
-      <section id="wall">
-        <Wall />
-      </section>
       <section id="gallery">
         <Gallery />
       </section>

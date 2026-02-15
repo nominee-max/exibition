@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import image from '../../assets/placeholder.jpeg';
-import './Carsoul.css';
+import {PHOTOS} from './Photos.jsx'; 
 
-const PHOTOS = Array(12).fill(image);
+import './Carsoul.css';
 
 const Carsoul = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,6 +26,8 @@ const Carsoul = () => {
   }, [nextSlide, prevSlide]);
 
   const getPhotoStyle = (index) => {
+    const photo = PHOTOS[index];
+    const aspectRatio = photo.width / photo.height;
     const total = PHOTOS.length;
     // Calculate the shortest path for rotation
     let offset = index - currentIndex;
@@ -53,6 +54,7 @@ const Carsoul = () => {
       zIndex: 10 - absOffset,
       pointerEvents: isVisible ? (isActive ? 'auto' : 'none') : 'none',
       willChange: 'transform, opacity',
+      aspectRatio: aspectRatio,
     };
   };
 
@@ -63,15 +65,32 @@ const Carsoul = () => {
       </div>
 
       <div className="carousel-viewport">
-        {PHOTOS.map((photo, index) => (
-          <div
-            key={index}
-            className="carousel-photo"
-            style={getPhotoStyle(index)}
-          >
-            <img src={photo} alt={`Slide ${index + 1}`} />
-          </div>
-        ))}
+        {PHOTOS.map((photo, index) => {
+          const isPortrait = photo.width < photo.height;
+          return (
+            <div
+              key={index}
+              className={`carousel-photo ${isPortrait ? 'portrait' : ''}`}
+              style={getPhotoStyle(index)}
+            >
+              {photo.placeholder ? (
+                <div className="placeholder" style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#f0f0f0',
+                  color: '#999',
+                }}>
+                  Photo {photo.id} ({photo.width}x{photo.height})
+                </div>
+              ) : (
+                <img src={photo.src} alt={`Slide ${index + 1}`} />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="carousel-controls">

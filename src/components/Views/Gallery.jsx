@@ -1,50 +1,26 @@
-import React, { useState } from 'react'
-import image from '../../assets/placeholder.jpeg'
-import './Gallery.css'
+import React from "react";
+import { PHOTOS } from "./Photos.jsx";
+import "./Gallery.css";
 
 const Gallery = () => {
-  const [photoQuotes, setPhotoQuotes] = useState(
-    Array(12).fill(null).map(() => ({
-      image,
-      quote: '',
-    }))
-  )
-
-  const handleQuoteChange = (index, newQuote) => {
-    const updated = [...photoQuotes]
-    updated[index].quote = newQuote
-    setPhotoQuotes(updated)
-  }
-
   return (
     <div className="gallery-container">
-      <div className="gallery-content">
-        <h1 className="gallery-title">Gallery</h1>
+      <h1 className="gallery-title">Gallery</h1>
 
-        <div className="gallery-items">
-          {photoQuotes.map((item, index) => (
-            <div key={index} className="gallery-item">
-              <div className="gallery-photo-item">
-                <img src={item.image} alt={`Gallery ${index + 1}`} />
-              </div>
-              <div className="gallery-item-quote">
-                <input
-                  type="text"
-                  placeholder="Add a quote..."
-                  value={item.quote}
-                  onChange={(e) => handleQuoteChange(index, e.target.value)}
-                  className="gallery-quote-input"
-                />
-                {item.quote && (
-                  <p className="gallery-quote-display">{item.quote}</p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="gallery-grid">
+        {PHOTOS.map((photo) => (
+          <div key={photo.id} className="gallery-item">
+            <img
+              src={photo.src}
+              alt={`Gallery ${photo.id}`}
+              className="gallery-image"
+            />
+            <p className="gallery-quote">{photo.quote}</p>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Gallery
+export default Gallery;
