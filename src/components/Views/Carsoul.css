@@ -6,11 +6,11 @@
 .carousel-container {
   width: 100vw;
   min-height: 100vh;
-  background: #ffffff;   /* white background */
+  background: #ffffff;  
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;  /* removes bottom gap */
+  justify-content: flex-start;  
   overflow-x: hidden;
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -36,14 +36,14 @@
 }
 
 .carousel-header h1 {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   margin: 0;
-  color: #ffeb3b;
-  letter-spacing: -1px;
+  color: #000;
 }
 
 .carousel-viewport {
+  padding: 0 200px;
   position: relative;
   width: 100%;
   flex: 1;
@@ -51,34 +51,56 @@
   align-items: center;
   justify-content: center;
   perspective: 1000px;
-  padding: 0 80px;
+  padding: 0 40px; /* Reduced from 80px to show more side images */
+  overflow: visible; /* Allow side images to peek through */
 }
 
 .carousel-photo {
   position: absolute;
-  width: 85vw;
-  aspect-ratio: 8 / 5;
-  max-width: 900px;
-  max-height: 562px;
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 70vh;
   cursor: pointer;
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-photo.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.carousel-photo img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-photo.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .carousel-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 16px;
   transition: box-shadow 0.3s ease;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
   backface-visibility: hidden;
 }
 
-.carousel-photo[style*="scale(1)"] img {
+.carousel-photo.active img {
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
 }
 
@@ -86,8 +108,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -162,19 +183,22 @@
   padding-bottom: 0;
 }
 
-
 @media (max-width: 1024px) {
   .carousel-header h1 {
     font-size: 28px;
   }
-
+  
   .carousel-photo {
-    width: 80vw;
-    height: 65vh;
+    max-width: 85vw;
+    max-height: 65vh;
   }
-
+  
+  .carousel-photo img {
+    max-height: 65vh;
+  }
+  
   .carousel-viewport {
-    padding: 0 50px;
+    padding: 0 30px;
   }
 }
 
@@ -183,23 +207,26 @@
     font-size: 24px;
     padding-top: 20px;
   }
-
+  
   .carousel-viewport {
-    padding: 0 30px;
+    padding: 0 20px;
   }
-
+  
   .carousel-photo {
-    width: 90vw;
-    height: 60vh;
-    max-width: 100%;
+    max-width: 92vw;
+    max-height: 60vh;
   }
-
+  
+  .carousel-photo img {
+    max-height: 60vh;
+  }
+  
   .carousel-btn {
     width: 45px;
     height: 45px;
     font-size: 16px;
   }
-
+  
   .carousel-counter {
     font-size: 12px;
     padding-bottom: 25px;

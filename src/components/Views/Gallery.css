@@ -43,12 +43,14 @@
 
 .gallery-quote {
   margin-top: 28px;
-  font-size: 25px;
+  font-size: 23px;
+  text-align: center;
   align-content: center;
   line-height: 1.7;
   color: #333;
-  max-width: 600px;
-
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* mobile */

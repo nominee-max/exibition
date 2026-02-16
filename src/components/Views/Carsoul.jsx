@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {PHOTOS} from './Photos.jsx'; 
-
 import './Carsoul.css';
 
 const Carsoul = () => {
@@ -39,8 +38,6 @@ const Carsoul = () => {
     const isActive = offset === 0;
     const isVisible = absOffset <= 1; // Only show current, next, and previous
 
-    // Use viewport-based horizontal distance to create a slide motion
-    // focused image occupies most of the viewport; neighbors sit at edges
     const slideVW = 70; // percent of viewport width per step
 
     return {
@@ -61,12 +58,12 @@ const Carsoul = () => {
   return (
     <div className="carousel-container">
       <div className="carousel-header">
-        <h1>Gallery</h1>
+        <h1>photo exhibition</h1>
       </div>
 
       <div className="carousel-viewport">
         {PHOTOS.map((photo, index) => {
-          const isPortrait = photo.width < photo.height;
+          const isPortrait = photo.height > photo.width;
           return (
             <div
               key={index}
