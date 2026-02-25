@@ -59,6 +59,8 @@ const Carsoul = () => {
     <div className="carousel-container">
       <div className="carousel-header">
         <h1>Photo Exhibition</h1>
+        <div className="carousel-title-underline"></div>
+        <div className="carousel-subtitle-space"></div>
       </div>
 
       <div className="carousel-viewport">

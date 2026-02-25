@@ -5,7 +5,11 @@ import "./Gallery.css";
 const Gallery = () => {
   return (
     <div className="gallery-container">
-      <h1 className="gallery-title">Gallery</h1>
+      <div className="gallery-header">
+        <h1 className="gallery-title">Gallery</h1>
+        <div className="gallery-title-underline"></div>
+        <p className="gallery-subtitle">Exploring Energy: From Abundance to Scarcity</p>
+      </div>
 
       <div className="gallery-grid">
         {PHOTOS.map((photo) => (
